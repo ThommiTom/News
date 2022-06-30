@@ -5,6 +5,9 @@
 ## User settings
 xcuserdata/
 
+# API Key
+News/ApiKey.swift
+
 ## DS_Store
 .DS_Store
 News/.DS_Store
