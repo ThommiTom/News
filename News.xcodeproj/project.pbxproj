@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		455917F1286D8CD600BE4997 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455917F0286D8CD600BE4997 /* ApiKey.swift */; };
 		45F213D5286C48D5009FC26F /* NewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F213D4286C48D5009FC26F /* NewsApp.swift */; };
 		45F213D7286C48D5009FC26F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F213D6286C48D5009FC26F /* ContentView.swift */; };
 		45F213D9286C48D6009FC26F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45F213D8286C48D6009FC26F /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		455917F0286D8CD600BE4997 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		45F213D1286C48D5009FC26F /* News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F213D4286C48D5009FC26F /* NewsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApp.swift; sourceTree = "<group>"; };
 		45F213D6286C48D5009FC26F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -34,6 +36,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		455917EE286D8C9300BE4997 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				45F213E2286CBB49009FC26F /* SFSafariViewWrapper.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		455917EF286D8CBF00BE4997 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				455917F0286D8CD600BE4997 /* ApiKey.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		45F213C8286C48D5009FC26F = {
 			isa = PBXGroup;
 			children = (
@@ -55,7 +73,8 @@
 			children = (
 				45F213D4286C48D5009FC26F /* NewsApp.swift */,
 				45F213D6286C48D5009FC26F /* ContentView.swift */,
-				45F213E2286CBB49009FC26F /* SFSafariViewWrapper.swift */,
+				455917EF286D8CBF00BE4997 /* Networking */,
+				455917EE286D8C9300BE4997 /* Utilities */,
 				45F213D8286C48D6009FC26F /* Assets.xcassets */,
 				45F213DA286C48D6009FC26F /* Preview Content */,
 			);
@@ -142,6 +161,7 @@
 			files = (
 				45F213D7286C48D5009FC26F /* ContentView.swift in Sources */,
 				45F213E3286CBB49009FC26F /* SFSafariViewWrapper.swift in Sources */,
+				455917F1286D8CD600BE4997 /* ApiKey.swift in Sources */,
 				45F213D5286C48D5009FC26F /* NewsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
