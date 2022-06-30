@@ -6,7 +6,7 @@
 xcuserdata/
 
 # API Key
-News/ApiKey.swift
+News/Networking/ApiKey.swift
 
 ## DS_Store
 .DS_Store
