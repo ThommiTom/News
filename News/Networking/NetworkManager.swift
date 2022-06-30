@@ -11,6 +11,4 @@ class NetworkManager {
     static let shared = NetworkManager()
     
     private init() {}
-    
-    private let baseURLString = "https://newsapi.org/v2/"
 }
