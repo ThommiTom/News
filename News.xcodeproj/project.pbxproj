@@ -8,21 +8,27 @@
 
 /* Begin PBXBuildFile section */
 		455917F1286D8CD600BE4997 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455917F0286D8CD600BE4997 /* ApiKey.swift */; };
+		455917F3286D8E0900BE4997 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455917F2286D8E0900BE4997 /* NetworkManager.swift */; };
+		455917F5286D8F3900BE4997 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455917F4286D8F3900BE4997 /* NetworkError.swift */; };
+		455917F7286D936B00BE4997 /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455917F6286D936B00BE4997 /* URLBuilder.swift */; };
 		45F213D5286C48D5009FC26F /* NewsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F213D4286C48D5009FC26F /* NewsApp.swift */; };
 		45F213D7286C48D5009FC26F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F213D6286C48D5009FC26F /* ContentView.swift */; };
 		45F213D9286C48D6009FC26F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45F213D8286C48D6009FC26F /* Assets.xcassets */; };
 		45F213DC286C48D6009FC26F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45F213DB286C48D6009FC26F /* Preview Assets.xcassets */; };
-		45F213E3286CBB49009FC26F /* SFSafariViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F213E2286CBB49009FC26F /* SFSafariViewWrapper.swift */; };
+		45F213E3286CBB49009FC26F /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F213E2286CBB49009FC26F /* SafariView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		455917F0286D8CD600BE4997 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
+		455917F2286D8E0900BE4997 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		455917F4286D8F3900BE4997 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		455917F6286D936B00BE4997 /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
 		45F213D1286C48D5009FC26F /* News.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = News.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45F213D4286C48D5009FC26F /* NewsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApp.swift; sourceTree = "<group>"; };
 		45F213D6286C48D5009FC26F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		45F213D8286C48D6009FC26F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45F213DB286C48D6009FC26F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		45F213E2286CBB49009FC26F /* SFSafariViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSafariViewWrapper.swift; sourceTree = "<group>"; };
+		45F213E2286CBB49009FC26F /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,7 +45,7 @@
 		455917EE286D8C9300BE4997 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				45F213E2286CBB49009FC26F /* SFSafariViewWrapper.swift */,
+				45F213E2286CBB49009FC26F /* SafariView.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -48,6 +54,9 @@
 			isa = PBXGroup;
 			children = (
 				455917F0286D8CD600BE4997 /* ApiKey.swift */,
+				455917F2286D8E0900BE4997 /* NetworkManager.swift */,
+				455917F4286D8F3900BE4997 /* NetworkError.swift */,
+				455917F6286D936B00BE4997 /* URLBuilder.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -160,7 +169,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				45F213D7286C48D5009FC26F /* ContentView.swift in Sources */,
-				45F213E3286CBB49009FC26F /* SFSafariViewWrapper.swift in Sources */,
+				455917F7286D936B00BE4997 /* URLBuilder.swift in Sources */,
+				45F213E3286CBB49009FC26F /* SafariView.swift in Sources */,
+				455917F3286D8E0900BE4997 /* NetworkManager.swift in Sources */,
+				455917F5286D8F3900BE4997 /* NetworkError.swift in Sources */,
 				455917F1286D8CD600BE4997 /* ApiKey.swift in Sources */,
 				45F213D5286C48D5009FC26F /* NewsApp.swift in Sources */,
 			);

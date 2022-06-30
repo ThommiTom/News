@@ -9,30 +9,46 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var showSafari = false
-    
-    @State private var websites: [URL] = [
-        URL(string: "https://www.google.de")!,
-        URL(string: "https://www.apple.com/de/")!,
-        URL(string: "https://de.wikipedia.org/wiki/Wikipedia:Hauptseite")!,
-        URL(string: "https://www.reddit.com")!,
-        URL(string: "https://github.com")!,
-        URL(string: "https://developer.apple.com/documentation/technologies")!,
-        URL(string: "https://www.hackingwithswift.com")!
-    ]
+    @State private var searchText = ""
+    @State private var stringURL: String = ""
+    @State private var url: URL?
     
     var body: some View {
         NavigationView {
-            List {
-                ForEach(websites, id: \.self) { website in
-                    NavigationLink {
-                        SFSafariViewWrapper(url: website)
-                    } label: {
-                        Text("\(website.absoluteString)")
-                    }
+            VStack {
+                Text("URL Construction Test")
+                    .font(.title)
+                    .padding()
+                
+                Text(stringURL)
+                    .padding()
+                
+                
+                Button {
+                    showSafari = true
+                } label: {
+                    Text("Open in Safari")
+                }
+                .buttonStyle(.borderedProminent)
+            }
+            .navigationTitle("News")
+            .searchable(text: $searchText, prompt: "Searching for ...")
+            .onChange(of: searchText) { _ in
+                if searchText.isEmpty {
+                    stringURL = ""
+                    url = nil
+                } else {
+                    url = URLBuilder.shared.createEverythingURL(searchFor: searchText.lowercased())
+                    stringURL = url!.absoluteString
                 }
             }
-            .navigationTitle("Websites")
+            .fullScreenCover(isPresented: $showSafari) {
+                if let validURL = url {
+                    SafariView(url: validURL)
+                }
+            }
         }
+        
     }
 }
 
