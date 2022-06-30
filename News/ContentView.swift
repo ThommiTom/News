@@ -30,6 +30,7 @@ struct ContentView: View {
                     Text("Open in Safari")
                 }
                 .buttonStyle(.borderedProminent)
+                .disabled(searchText.isEmpty ? true : false)
             }
             .navigationTitle("News")
             .searchable(text: $searchText, prompt: "Searching for ...")
