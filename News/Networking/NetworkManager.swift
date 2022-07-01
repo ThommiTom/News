@@ -53,7 +53,9 @@ class NetworkManager {
             
             // parse data into model
             do {
-                let newsResponse = try JSONDecoder().decode(NewsResponse.self, from: validData)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let newsResponse = try decoder.decode(NewsResponse.self, from: validData)
                 completion(.success(newsResponse))
             } catch {
                 print(NetworkError.unableToDecodeData.localizedDescription)
