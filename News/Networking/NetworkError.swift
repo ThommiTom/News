@@ -14,4 +14,5 @@ enum NetworkError: String, Error {
     case invalidStatusCode = "Invalid status code"
     case invalidData = "Invalid data"
     case invalidURL = "Invalid URL"
+    case unableToDecodeData = "Unable to decode obtained data."
 }

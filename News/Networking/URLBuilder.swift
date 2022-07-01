@@ -15,17 +15,17 @@ class URLBuilder {
         urlComponents.scheme = "https"
         urlComponents.host = "newsapi.org"
     }
-    
+        
     func createEverythingURL(searchFor q: String) -> URL {
         urlComponents.path = "/v2/everything"
-        
+
         let querySearch = URLQueryItem(name: "q", value: q)
-        let queryLanguage = URLQueryItem(name: "language", value: "en")
+//        let queryLanguage = URLQueryItem(name: "language", value: "en")
+//        let queryDomain = URLQueryItem(name: "domains", value: "techcrunch.com")
+//        let querySortBy = URLQueryItem(name: "sortBy", value: "popularity")
         let queryKey = URLQueryItem(name: "apiKey", value: apiKey)
-        let queryDomain = URLQueryItem(name: "domains", value: "techcrunch.com")
-        let querySortBy = URLQueryItem(name: "sortBy", value: "popularity")
         
-        urlComponents.queryItems = [queryKey, queryLanguage, querySearch, queryDomain, querySortBy]
+        urlComponents.queryItems = [querySearch, queryKey]
         
         guard let url = urlComponents.url else {
             fatalError("URL construction failed!")
