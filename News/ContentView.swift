@@ -28,18 +28,23 @@ struct ContentView: View {
                 // TODO: use combine frame to avoid server spam!
                 if !searchText.isEmpty {
                     Task {
-                        await NetworkManager.shared.getNews(searchFor: searchText) { result in
-                            switch result {
-                            case .success(let newsResponse):
-                                print("success")
-                                DispatchQueue.main.async {
-                                    news = newsResponse
-                                }
-                            case .failure(let error):
-                                print(error.rawValue)
-                            }
-                        }
+                        news = await NetworkManager.shared.getNews(searchFor: searchText)
                     }
+//                    Task {
+//                        await NetworkManager.shared.getNews(searchFor: searchText) { result in
+//                            switch result {
+//                            case .success(let newsResponse):
+//                                print("success")
+//                                DispatchQueue.main.async {
+//                                    news = newsResponse
+//                                }
+//                            case .failure(let error):
+//                                print(error.rawValue)
+//                            }
+//                        }
+//                    }
+                } else {
+                    news?.articles.removeAll()
                 }
             }
         }
