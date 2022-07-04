@@ -10,6 +10,8 @@ import SwiftUI
 struct ArticleList: View {
     @Binding var articles: Array<Article>
     
+    @Environment(\.dismissSearch) var dismissSearch
+    
     var body: some View {
         List {
             ForEach(articles, id: \.self) { article in
@@ -26,8 +28,12 @@ struct ArticleList: View {
                         .opacity(0.7)
                 }
             }
+            .onChange(of: articles) { _ in
+                dismissSearch()
+            }
         }
         .listStyle(.plain)
+        
     }
 }
 

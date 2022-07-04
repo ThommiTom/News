@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		451DB1452871C47C00167831 /* SearchQuestionnaire.swift in Sources */ = {isa = PBXBuildFile; fileRef = 451DB1442871C47C00167831 /* SearchQuestionnaire.swift */; };
 		455917F1286D8CD600BE4997 /* ApiKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455917F0286D8CD600BE4997 /* ApiKey.swift */; };
 		455917F3286D8E0900BE4997 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455917F2286D8E0900BE4997 /* NetworkManager.swift */; };
 		455917F5286D8F3900BE4997 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 455917F4286D8F3900BE4997 /* NetworkError.swift */; };
@@ -24,7 +23,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		451DB1442871C47C00167831 /* SearchQuestionnaire.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchQuestionnaire.swift; sourceTree = "<group>"; };
 		455917F0286D8CD600BE4997 /* ApiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKey.swift; sourceTree = "<group>"; };
 		455917F2286D8E0900BE4997 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		455917F4286D8F3900BE4997 /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
@@ -92,7 +90,6 @@
 			children = (
 				45F213D6286C48D5009FC26F /* ContentView.swift */,
 				45C6558D2871BC1500039F35 /* SearchView.swift */,
-				451DB1442871C47C00167831 /* SearchQuestionnaire.swift */,
 				45C6558A2871B2FA00039F35 /* ArticleList.swift */,
 			);
 			path = View;
@@ -209,7 +206,6 @@
 			files = (
 				45C6558E2871BC1500039F35 /* SearchView.swift in Sources */,
 				45F213D7286C48D5009FC26F /* ContentView.swift in Sources */,
-				451DB1452871C47C00167831 /* SearchQuestionnaire.swift in Sources */,
 				455917F9286DB6B100BE4997 /* NewsResponse.swift in Sources */,
 				45C6558B2871B2FA00039F35 /* ArticleList.swift in Sources */,
 				455917F7286D936B00BE4997 /* URLBuilder.swift in Sources */,

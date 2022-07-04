@@ -9,29 +9,15 @@ import SwiftUI
 
 struct SearchView: View {
     @StateObject var newsHandler = NewsHandler()
-    
     @State private var searchText = ""
-    @State var showSearchSheet = false
     
     var body: some View {
         ArticleList(articles: $newsHandler.fetchedArticles)
-            .navigationTitle("News Search...")
-            .sheet(isPresented: $showSearchSheet) {
+            .navigationTitle("News Search")
+            .searchable(text: $searchText, prompt: "Search the web for ...")
+            .onSubmit(of: SubmitTriggers.search) {
                 Task {
                     await newsHandler.fetchNews(searchText)
-                }
-            } content: {
-                SearchQuestionnaire(searchText: $searchText)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button {
-                        showSearchSheet = true
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                            .padding()
-                    }
-
                 }
             }
     }

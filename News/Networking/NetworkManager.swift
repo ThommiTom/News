@@ -14,8 +14,6 @@ class NetworkManager {
     
     private init() {}
     
-    // TODO: implement NetworkManager!
-    
     func getNews(searchFor q: String) async -> NewsResponse? {
         let url = URLBuilder.shared.createEverythingURL(searchFor: q)
         
@@ -44,7 +42,6 @@ class NetworkManager {
         let url = URLBuilder.shared.createEverythingURL(searchFor: q)
         
         URLSession.shared.dataTask(with: URLRequest(url: url)) { data, urlResponse, error in
-            print(url.absoluteString)
             // handle possible error
             guard error == nil else {
                 print(NetworkError.unableToComplete.localizedDescription)
