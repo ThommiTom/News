@@ -12,16 +12,17 @@ struct SearchView: View {
     @State private var searchText = ""
     
     var body: some View {
-        ArticleList(articles: $newsHandler.fetchedArticles)
-            .navigationTitle("News Search")
-            .searchable(text: $searchText, prompt: "Search the web for ...")
-            .onSubmit(of: SubmitTriggers.search) {
-                Task {
-                    await newsHandler.fetchNews(searchText)
+        NavigationView {
+            ArticleList(articles: $newsHandler.fetchedArticles)
+                .navigationTitle("News Search")
+                .searchable(text: $searchText, prompt: "Search the web for ...")
+                .onSubmit(of: SubmitTriggers.search) {
+                    Task {
+                        await newsHandler.fetchNews(searchText)
+                    }
                 }
-            }
+        }
     }
-    
 }
 
 struct SearchView_Previews: PreviewProvider {

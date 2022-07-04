@@ -8,11 +8,31 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State private var selection = "headlines"
+    
     var body: some View {
-        NavigationView {
+        TabView(selection: $selection) {
             SearchView()
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                    Text("Search")
+                }
+                .tag("search")
+            
+            HeadlineView()
+                .tabItem {
+                    Image(systemName: "newspaper")
+                    Text("Headlines")
+                }
+                .tag("headlines")
+            
+            FavoriteView()
+                .tabItem {
+                    Image(systemName: "suit.heart.fill")
+                    Text("Favorites")
+                }
+                .tag("favorites")
         }
-        .navigationViewStyle(.stack)
     }
 }
 
