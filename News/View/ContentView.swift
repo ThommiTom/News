@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-struct ContentView: View {   
+struct ContentView: View {
     var body: some View {
         NavigationView {
             SearchView()
         }
+        .navigationViewStyle(.stack)
     }
 }
 
