@@ -27,13 +27,12 @@ struct HeadlineView: View {
                 Text("show editable settings here")
             }
         }
+        .navigationViewStyle(.stack)
     }
 }
 
 struct HeadlineView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            HeadlineView()
-        }
+        HeadlineView()
     }
 }

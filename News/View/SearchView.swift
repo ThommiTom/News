@@ -22,13 +22,12 @@ struct SearchView: View {
                     }
                 }
         }
+        .navigationViewStyle(.stack)
     }
 }
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            SearchView()
-        }
+        SearchView()
     }
 }
