@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct SearchView: View {
+    @StateObject var newsHandler = NewsHandler()
+    
     @State private var searchText = ""
-    @State var news: NewsResponse? = nil
     @State var showSearchSheet = false
     
     var body: some View {
-        ArticleList(articles: news?.articles)
+        ArticleList(articles: $newsHandler.fetchedArticles)
+            .navigationTitle("News Search...")
             .sheet(isPresented: $showSearchSheet) {
-                if !searchText.isEmpty {
-                    Task {
-                        news = await NetworkManager.shared.getNews(searchFor: searchText)
-                    }
+                Task {
+                    await newsHandler.fetchNews(searchText)
                 }
             } content: {
                 SearchQuestionnaire(searchText: $searchText)

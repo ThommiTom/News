@@ -17,7 +17,6 @@ class NetworkManager {
     // TODO: implement NetworkManager!
     
     func getNews(searchFor q: String) async -> NewsResponse? {
-        print("getNews - searchFor q: \(q)")
         let url = URLBuilder.shared.createEverythingURL(searchFor: q)
         
         do {
@@ -42,7 +41,6 @@ class NetworkManager {
     }
     
     func getNews(searchFor q: String, completion: @escaping (Result<NewsResponse, NetworkError>) -> Void) async {
-        print("getNews - searchFor q: \(q)")
         let url = URLBuilder.shared.createEverythingURL(searchFor: q)
         
         URLSession.shared.dataTask(with: URLRequest(url: url)) { data, urlResponse, error in
