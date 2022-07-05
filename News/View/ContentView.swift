@@ -28,10 +28,10 @@ struct ContentView: View {
             
             FavoriteView()
                 .tabItem {
-                    Image(systemName: "suit.heart.fill")
-                    Text("Favorites")
+                    Image(systemName: "eyeglasses")
+                    Text("Reading List")
                 }
-                .tag("favorites")
+                .tag("readingList")
         }
     }
 }
