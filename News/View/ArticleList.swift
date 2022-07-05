@@ -15,7 +15,7 @@ struct ArticleList: View {
     var body: some View {
         List {
             ForEach(articles, id: \.self) { article in
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 5) {
                     Text(article.source?.name ?? "nil")
                         .font(.caption)
                         .opacity(0.7)
