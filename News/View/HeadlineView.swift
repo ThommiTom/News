@@ -8,19 +8,23 @@
 import SwiftUI
 
 struct HeadlineView: View {
+    @StateObject var newsHandler = NewsHandler()
     @State private var showSettings = false
     
     var body: some View {
         NavigationView {
-            VStack {
-                Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-            }
+            ArticleList(articles: $newsHandler.fetchedHeadlines)
             .navigationTitle("Headlines")
             .toolbar {
                 Button {
                     showSettings = true
                 } label: {
                     Image(systemName: "gear")
+                }
+            }
+            .onAppear {
+                Task {
+                    await NetworkManager.shared.getHeadlines(for: nil, in: Country.de)
                 }
             }
             .sheet(isPresented: $showSettings) {

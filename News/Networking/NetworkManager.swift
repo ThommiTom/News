@@ -83,4 +83,32 @@ class NetworkManager {
             }
         }.resume()
     }
+    
+    
+    func getHeadlines(for category: Category?, in country: Country?) async -> NewsResponse? {
+        let url = URLBuilder.shared.createHeadlineURL(for: category, in: country)
+        
+        print(url.absoluteString)
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            print("Data downloaded")
+            
+            let jsonDecoder = JSONDecoder()
+            jsonDecoder.dateDecodingStrategy = .iso8601
+            
+            let decodedData = try jsonDecoder.decode(NewsResponse.self, from: data)
+            print("\(decodedData.articles.count)")
+            return decodedData
+            
+        } catch let jsonError as NSError {
+            print("JSON decode failed: \(jsonError.localizedDescription)")
+        } catch let networkError as NetworkError {
+            print("Networking failed: \(networkError.rawValue)")
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return nil
+    }
 }
