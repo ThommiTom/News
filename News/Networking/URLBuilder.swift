@@ -20,12 +20,32 @@ class URLBuilder {
         urlComponents.path = "/v2/everything"
 
         let querySearch = URLQueryItem(name: "q", value: q)
-//        let queryLanguage = URLQueryItem(name: "language", value: "en")
-//        let queryDomain = URLQueryItem(name: "domains", value: "techcrunch.com")
-//        let querySortBy = URLQueryItem(name: "sortBy", value: "popularity")
         let queryKey = URLQueryItem(name: "apiKey", value: apiKey)
         
         urlComponents.queryItems = [querySearch, queryKey]
+        
+        guard let url = urlComponents.url else {
+            fatalError("URL construction failed!")
+        }
+        
+        return url
+    }
+    
+    func createHeadlineURL(for category: Category?, in country: Country?) -> URL {
+        urlComponents.path = "/v2/top-headlines"
+        
+        var items: [URLQueryItem] = [URLQueryItem(name: "apiKey", value: apiKey)]
+            
+        if let category = category {
+            items.append(URLQueryItem(name: "category", value: category.rawValue))
+        }
+        
+        if let country = country {
+            let userInput = countries[country.rawValue]!
+            items.append(URLQueryItem(name: "country", value: userInput.rawValue))
+        }
+        
+        urlComponents.queryItems = items
         
         guard let url = urlComponents.url else {
             fatalError("URL construction failed!")
