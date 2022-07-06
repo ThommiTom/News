@@ -36,7 +36,7 @@ struct HeadlineView: View {
                 }
             }
             .sheet(isPresented: $showSettings) {
-                Text("show editable settings here")
+                SetupView()
             }
         }
         .navigationViewStyle(.stack)
