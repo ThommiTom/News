@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var newsHandler = NewsHandler()
     @State private var selection = "headlines"
     
     var body: some View {
@@ -33,6 +34,7 @@ struct ContentView: View {
                 }
                 .tag("readingList")
         }
+        .environmentObject(newsHandler)
     }
 }
 

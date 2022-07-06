@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct HeadlineView: View {
-    @StateObject var newsHandler = NewsHandler()
+    @EnvironmentObject var newsHandler: NewsHandler
     @State private var showSettings = false
     
     var body: some View {

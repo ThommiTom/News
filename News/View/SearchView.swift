@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchView: View {
-    @StateObject var newsHandler = NewsHandler()
+    @EnvironmentObject var newsHandler: NewsHandler
     @State private var searchText = ""
     
     var body: some View {
