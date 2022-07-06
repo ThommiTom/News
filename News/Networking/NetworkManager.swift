@@ -14,33 +14,7 @@ class NetworkManager {
     
     private init() {}
     
-    func getNews(searchFor q: String) async -> NewsResponse? {
-        let url = URLBuilder.shared.createEverythingURL(searchFor: q)
-        
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            print("Data downloaded")
-            
-            let jsonDecoder = JSONDecoder()
-            jsonDecoder.dateDecodingStrategy = .iso8601
-            
-            let decodedData = try jsonDecoder.decode(NewsResponse.self, from: data)
-            return decodedData
-            
-        } catch let jsonError as NSError {
-            print("JSON decode failed: \(jsonError.localizedDescription)")
-        } catch let networkError as NetworkError {
-            print("Networking failed: \(networkError.rawValue)")
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        return nil
-    }
-    
-    func getNews(searchFor q: String, completion: @escaping (Result<NewsResponse, NetworkError>) -> Void) async {
-        let url = URLBuilder.shared.createEverythingURL(searchFor: q)
-        
+    private func networkCall(with url: URL, completion: @escaping (Result<NewsResponse, NetworkError>) -> Void) async {
         URLSession.shared.dataTask(with: URLRequest(url: url)) { data, urlResponse, error in
             // handle possible error
             guard error == nil else {
@@ -84,6 +58,47 @@ class NetworkManager {
         }.resume()
     }
     
+    func getNews(searchFor q: String, completion: @escaping (Result<NewsResponse, NetworkError>) -> Void) async {
+        let url = URLBuilder.shared.createEverythingURL(searchFor: q)
+        
+        await networkCall(with: url, completion: completion)
+    }
+    
+    func getHeadlines(for category: Category?, in country: Country?, completion: @escaping (Result<NewsResponse, NetworkError>) -> Void) async {
+        let url = URLBuilder.shared.createHeadlineURL(for: category, in: country)
+        
+        await networkCall(with: url, completion: completion)
+    }
+    
+    
+    
+    
+    
+    /* EXPLORING NETWORKING ALTERNATIVES */
+    
+    func getNews(searchFor q: String) async -> NewsResponse? {
+        let url = URLBuilder.shared.createEverythingURL(searchFor: q)
+        
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+            print("Data downloaded")
+            
+            let jsonDecoder = JSONDecoder()
+            jsonDecoder.dateDecodingStrategy = .iso8601
+            
+            let decodedData = try jsonDecoder.decode(NewsResponse.self, from: data)
+            return decodedData
+            
+        } catch let jsonError as NSError {
+            print("JSON decode failed: \(jsonError.localizedDescription)")
+        } catch let networkError as NetworkError {
+            print("Networking failed: \(networkError.rawValue)")
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        return nil
+    }
     
     func getHeadlines(for category: Category?, in country: Country?) async -> NewsResponse? {
         let url = URLBuilder.shared.createHeadlineURL(for: category, in: country)
