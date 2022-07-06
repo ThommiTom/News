@@ -41,8 +41,9 @@ class URLBuilder {
         }
         
         if let country = country {
-//            let userInput = countries[country.rawValue]!
             items.append(URLQueryItem(name: "country", value: country.rawValue))
+        } else {
+            items.append(URLQueryItem(name: "country", value: Country.us.rawValue))
         }
         
         urlComponents.queryItems = items

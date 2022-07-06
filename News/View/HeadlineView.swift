@@ -9,11 +9,14 @@ import SwiftUI
 
 struct HeadlineView: View {
     @EnvironmentObject var newsHandler: NewsHandler
+    
+    @State private var category: Category?
+    @State private var country: Country?
     @State private var showSettings = false
     
     var body: some View {
         NavigationView {
-            ArticleList(articles: $newsHandler.fetchedHeadlines)
+            ArticleList(articles: $newsHandler.headlines)
             .navigationTitle("Headlines")
             .toolbar {
                 Button {
@@ -24,7 +27,12 @@ struct HeadlineView: View {
             }
             .onAppear {
                 Task {
-                    await NetworkManager.shared.getHeadlines(for: nil, in: Country.de)
+                    await newsHandler.fetchHeadlines(for: category, in: country)
+                }
+            }
+            .refreshable {
+                Task {
+                    await newsHandler.fetchHeadlines(for: category, in: country)
                 }
             }
             .sheet(isPresented: $showSettings) {

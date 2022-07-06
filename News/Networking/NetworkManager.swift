@@ -60,13 +60,11 @@ class NetworkManager {
     
     func getNews(searchFor q: String, completion: @escaping (Result<NewsResponse, NetworkError>) -> Void) async {
         let url = URLBuilder.shared.createEverythingURL(searchFor: q)
-        
         await networkCall(with: url, completion: completion)
     }
     
     func getHeadlines(for category: Category?, in country: Country?, completion: @escaping (Result<NewsResponse, NetworkError>) -> Void) async {
-        let url = URLBuilder.shared.createHeadlineURL(for: category, in: country)
-        
+        let url = URLBuilder.shared.createHeadlineURL(for: category, in: country)       
         await networkCall(with: url, completion: completion)
     }
     

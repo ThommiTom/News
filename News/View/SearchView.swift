@@ -13,7 +13,7 @@ struct SearchView: View {
     
     var body: some View {
         NavigationView {
-            ArticleList(articles: $newsHandler.fetchedArticles)
+            ArticleList(articles: $newsHandler.articles)
                 .navigationTitle("News Search")
                 .searchable(text: $searchText, prompt: "Search the web for ...")
                 .onSubmit(of: SubmitTriggers.search) {
