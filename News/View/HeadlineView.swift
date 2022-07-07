@@ -11,8 +11,6 @@ struct HeadlineView: View {
     @EnvironmentObject var newsHandler: NewsHandler
     @StateObject var settings = UserSettings()
     
-    @State private var category: Category?
-    @State private var country: Country?
     @State private var showSettings = false
     
     var body: some View {
@@ -28,17 +26,18 @@ struct HeadlineView: View {
             }
             .onAppear {
                 Task {
-                    await newsHandler.fetchHeadlines(for: category, in: country)
+                    await newsHandler.fetchHeadlines(for: settings.category, in: settings.language, from: settings.dateFrom, to: settings.dateTo)
                 }
             }
             .refreshable {
                 Task {
-                    await newsHandler.fetchHeadlines(for: category, in: country)
+                    await newsHandler.fetchHeadlines(for: settings.category, in: settings.language, from: settings.dateFrom, to: settings.dateTo)
                 }
             }
             .sheet(isPresented: $showSettings, onDismiss: {
-                let testURL = URLBuilder.shared.createHeadlineURL(for: settings.category, in: settings.language, from: settings.dateFrom, to: settings.dateTo)
-                print(testURL)
+                Task {
+                    await newsHandler.fetchHeadlines(for: settings.category, in: settings.language, from: settings.dateFrom, to: settings.dateTo)
+                }
             }, content: {
                 SetupView(settings: settings)
             })

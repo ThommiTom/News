@@ -31,30 +31,6 @@ class URLBuilder {
         return url
     }
     
-    func createHeadlineURL(for category: Category?, in country: Country?) -> URL {
-        urlComponents.path = "/v2/top-headlines"
-        
-        var items: [URLQueryItem] = [URLQueryItem(name: "apiKey", value: apiKey)]
-            
-        if let category = category {
-            items.append(URLQueryItem(name: "category", value: category.rawValue))
-        }
-        
-        if let country = country {
-            items.append(URLQueryItem(name: "country", value: country.rawValue))
-        } else {
-            items.append(URLQueryItem(name: "country", value: Country.us.rawValue))
-        }
-        
-        urlComponents.queryItems = items
-        
-        guard let url = urlComponents.url else {
-            fatalError("URL construction failed!")
-        }
-        
-        return url
-    }
-    
     func createHeadlineURL(for category: Category?, in language: Language?, from: String?, to: String?) -> URL {
         urlComponents.path = "/v2/top-headlines"
         
@@ -78,6 +54,8 @@ class URLBuilder {
         guard let url = urlComponents.url else {
             fatalError("URL construction failed!")
         }
+        
+        print(url.absoluteString)
         
         return url
     }

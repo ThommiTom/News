@@ -27,8 +27,8 @@ class NewsHandler: ObservableObject {
         }
     }
     
-    func fetchHeadlines(for category: Category?, in country: Country? = .us) async {
-        await NetworkManager.shared.getHeadlines(for: category, in: country) { result in
+    func fetchHeadlines(for category: Category?, in language: Language?, from: String?, to: String?) async {
+        await NetworkManager.shared.getHeadlines(for: category, in: language, from: from, to: to) { result in
             switch result {
             case .success(let newsResponse):
                 DispatchQueue.main.async {

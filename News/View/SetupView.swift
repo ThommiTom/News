@@ -20,6 +20,7 @@ struct SetupView: View {
     private let categories: Array<Category> = [ .business, .entertainment, .general, .health, .science, .sports, .technology]
     
     private var lowerLimit: Date {
+        // MARK: testing the API with from and to parameters shows that the api is not working correctly
         // basic plan of newsapi only allows seraching for articles not older than a month
         Calendar.current.date(byAdding: .day, value: -30, to: Date()) ?? .now
     }
@@ -51,8 +52,8 @@ struct SetupView: View {
                             }
                         }
                         .pickerStyle(.wheel)
+                        .disabled(!settings.categoryToggleOn)
                     }
-                    
                 } header: {
                     Text("Category")
                 }
@@ -60,30 +61,37 @@ struct SetupView: View {
                 Section {
                     Toggle(settings.periodToggleOn ? "Disable" : "Enable", isOn: $settings.periodToggleOn.animation())
                     if settings.periodToggleOn{
+//                        VStack {
+//                            DatePicker("From", selection: $from, in: lowerLimit...upperLimit, displayedComponents: .date)
+//                                .datePickerStyle(.compact)
+//                            DatePicker("to", selection: $to, in: from...upperLimit, displayedComponents: .date)
+//                                .datePickerStyle(.compact)
+//                        }
+                        
                         HStack {
                             Spacer()
-                            
+
                             VStack(alignment: .leading) {
                                 Text("From")
                                     .font(.title2)
-                                
+
                                 DatePicker("From", selection: $from, in: lowerLimit...upperLimit, displayedComponents: .date)
                                     .datePickerStyle(.compact)
                                     .labelsHidden()
                             }
-                            
-                            
+
+
                             Spacer()
-                            
+
                             VStack(alignment: .leading) {
                                 Text("To")
                                     .font(.title2)
-                                
+
                                 DatePicker("to", selection: $to, in: from...upperLimit, displayedComponents: .date)
                                     .datePickerStyle(.compact)
                                     .labelsHidden()
                             }
-                            
+
                             Spacer()
                         }
                     }

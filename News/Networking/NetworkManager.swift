@@ -63,12 +63,10 @@ class NetworkManager {
         await networkCall(with: url, completion: completion)
     }
     
-    func getHeadlines(for category: Category?, in country: Country?, completion: @escaping (Result<NewsResponse, NetworkError>) -> Void) async {
-        let url = URLBuilder.shared.createHeadlineURL(for: category, in: country)       
+    func getHeadlines(for category: Category?, in language: Language?, from: String?, to: String?, completion: @escaping (Result<NewsResponse, NetworkError>) -> Void) async {
+        let url = URLBuilder.shared.createHeadlineURL(for: category, in: language, from: from, to: to)
         await networkCall(with: url, completion: completion)
     }
-    
-    
     
     
     
@@ -98,8 +96,8 @@ class NetworkManager {
         return nil
     }
     
-    func getHeadlines(for category: Category?, in country: Country?) async -> NewsResponse? {
-        let url = URLBuilder.shared.createHeadlineURL(for: category, in: country)
+    func getHeadlines(for category: Category?, in language: Language?, from: String?, to: String?) async -> NewsResponse? {
+        let url = URLBuilder.shared.createHeadlineURL(for: category, in: language, from: from, to: to)
         
         print(url.absoluteString)
         
