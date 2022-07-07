@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HeadlineView: View {
     @EnvironmentObject var newsHandler: NewsHandler
+    @StateObject var settings = UserSettings()
     
     @State private var category: Category?
     @State private var country: Country?
@@ -35,9 +36,11 @@ struct HeadlineView: View {
                     await newsHandler.fetchHeadlines(for: category, in: country)
                 }
             }
-            .sheet(isPresented: $showSettings) {
-                SetupView()
-            }
+            .sheet(isPresented: $showSettings, onDismiss: {
+                print("WIP - define on dismiss action here")
+            }, content: {
+                SetupView(settings: settings)
+            })
         }
         .navigationViewStyle(.stack)
     }
