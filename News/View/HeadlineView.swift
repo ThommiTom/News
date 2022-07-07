@@ -9,14 +9,14 @@ import SwiftUI
 
 struct HeadlineView: View {
     @EnvironmentObject var newsHandler: NewsHandler
-    @StateObject var settings = UserSettings()
+    @StateObject var settings = HeadlineSettings()
     
     @State private var showSettings = false
     
     var body: some View {
         NavigationView {
             ArticleList(articles: $newsHandler.headlines)
-            .navigationTitle("Headlines")
+            .navigationTitle("Todays Headlines")
             .toolbar {
                 Button {
                     showSettings = true
@@ -26,20 +26,20 @@ struct HeadlineView: View {
             }
             .onAppear {
                 Task {
-                    await newsHandler.fetchHeadlines(for: settings.category, in: settings.language, from: settings.dateFrom, to: settings.dateTo)
+                    await newsHandler.fetchHeadlines(for: settings.category, in: settings.language)
                 }
             }
             .refreshable {
                 Task {
-                    await newsHandler.fetchHeadlines(for: settings.category, in: settings.language, from: settings.dateFrom, to: settings.dateTo)
+                    await newsHandler.fetchHeadlines(for: settings.category, in: settings.language)
                 }
             }
             .sheet(isPresented: $showSettings, onDismiss: {
                 Task {
-                    await newsHandler.fetchHeadlines(for: settings.category, in: settings.language, from: settings.dateFrom, to: settings.dateTo)
+                    await newsHandler.fetchHeadlines(for: settings.category, in: settings.language)
                 }
             }, content: {
-                SetupView(settings: settings)
+                HeadlineSetupView(settings: settings)
             })
         }
         .navigationViewStyle(.stack)

@@ -9,7 +9,10 @@ import SwiftUI
 
 struct SearchView: View {
     @EnvironmentObject var newsHandler: NewsHandler
+    @StateObject var settings = SearchSettings()
+    
     @State private var searchText = ""
+    @State private var showSettings = false
     
     var body: some View {
         NavigationView {
@@ -17,8 +20,28 @@ struct SearchView: View {
                 .navigationTitle("News Search")
                 .searchable(text: $searchText, prompt: "Search the web for ...")
                 .onSubmit(of: SubmitTriggers.search) {
+                    settings.searchText = searchText
                     Task {
-                        await newsHandler.fetchNews(searchText)
+                        await newsHandler.fetchNews(settings.searchText, in: settings.language, from: settings.dateFrom, to: settings.dateTo, sortBy: settings.sortBy)
+                    }
+                }
+                .sheet(isPresented: $showSettings, onDismiss: {
+                    Task {
+                        await newsHandler.fetchNews(settings.searchText, in: settings.language, from: settings.dateFrom, to: settings.dateTo, sortBy: settings.sortBy)
+                    }
+                }, content: {
+                    SearchSetupView(settings: settings)
+                })
+                .refreshable {
+                    Task {
+                        await newsHandler.fetchNews(settings.searchText, in: settings.language, from: settings.dateFrom, to: settings.dateTo, sortBy: settings.sortBy)
+                    }
+                }
+                .toolbar {
+                    Button {
+                        showSettings = true
+                    } label: {
+                        Image(systemName: "gear")
                     }
                 }
         }

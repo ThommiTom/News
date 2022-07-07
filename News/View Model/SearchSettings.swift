@@ -1,5 +1,5 @@
 //
-//  UserSettings.swift
+//  SearchSerttings.swift
 //  News
 //
 //  Created by Thomas Schatton on 07.07.22.
@@ -7,17 +7,17 @@
 
 import Foundation
 
-class UserSettings: ObservableObject {
-    @Published var categoryToggleOn = false
+class SearchSettings: ObservableObject {
+    var searchText: String = ""
     @Published var periodToggleOn = false
+    @Published var sortToggleOn = false
     
     @Published var language: Language = .de
-//    @Published var country: Country = .de
-    @Published var category: Category = .general
+    @Published var sortBy: SortBy = .publishedAt
     
     // needs to be optional, due to use in network call
-    var from: Date? = nil
-    var to: Date? = nil
+    @Published var from: Date = .now
+    @Published var to: Date = .now
     
     private var iso8601formatter: ISO8601DateFormatter {
         let formatter = ISO8601DateFormatter()
@@ -26,26 +26,27 @@ class UserSettings: ObservableObject {
     }
     
     var dateFrom: String? {
-        if from != nil {
-            return iso8601formatter.string(from: from!)
+        if periodToggleOn {
+            return iso8601formatter.string(from: from)
         }
         return nil
     }
 
     var dateTo: String? {
-        if to != nil {
-            return iso8601formatter.string(from: to!)
+        if periodToggleOn {
+            return iso8601formatter.string(from: to)
         }
         return nil
     }
 
     func resetSettings() {
-        categoryToggleOn = false
         periodToggleOn = false
+        sortToggleOn = false
+        
+        searchText = ""
         language = .de
-//        country = .de
-        category = .general
-        from = nil
-        to = nil
+        sortBy = .publishedAt
+        from = .now
+        to = .now
     }
 }

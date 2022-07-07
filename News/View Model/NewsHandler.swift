@@ -12,9 +12,9 @@ class NewsHandler: ObservableObject {
     @Published var headlines: [Article] = []
     @Published var favoriteArticles: [Article] = []
     
-    func fetchNews(_ q: String) async {
+    func fetchNews(_ q: String, in language: Language, from: String?, to: String?, sortBy: SortBy) async {
         if !q.isEmpty {
-            await NetworkManager.shared.getNews(searchFor: q) { result in
+            await NetworkManager.shared.getNews(searchFor: q, in: language, from: from, to: to, sortBy: sortBy) { result in
                 switch result {
                 case .success(let newsResponse):
                     DispatchQueue.main.async {
@@ -27,8 +27,8 @@ class NewsHandler: ObservableObject {
         }
     }
     
-    func fetchHeadlines(for category: Category?, in language: Language?, from: String?, to: String?) async {
-        await NetworkManager.shared.getHeadlines(for: category, in: language, from: from, to: to) { result in
+    func fetchHeadlines(for category: Category?, in language: Language?) async {
+        await NetworkManager.shared.getHeadlines(for: category, in: language) { result in
             switch result {
             case .success(let newsResponse):
                 DispatchQueue.main.async {

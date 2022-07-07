@@ -15,23 +15,37 @@ class URLBuilder {
         urlComponents.scheme = "https"
         urlComponents.host = "newsapi.org"
     }
-        
-    func createEverythingURL(searchFor q: String) -> URL {
+    
+    func createEverythingURL(searchFor q: String, in language: Language?, from: String?, to: String?, sortBy: SortBy?) -> URL {
         urlComponents.path = "/v2/everything"
 
-        let querySearch = URLQueryItem(name: "q", value: q)
-        let queryKey = URLQueryItem(name: "apiKey", value: apiKey)
+        var items: [URLQueryItem] = [ URLQueryItem(name: "apiKey", value: apiKey), URLQueryItem(name: "q", value: q) ]
         
-        urlComponents.queryItems = [querySearch, queryKey]
+        if let language = language {
+            items.append(URLQueryItem(name: "language", value: language.rawValue))
+        }
+        
+        if from != nil && to != nil {
+            items.append(URLQueryItem(name: "from", value: from!))
+            items.append(URLQueryItem(name: "to", value: to!))
+        }
+        
+        if let sortBy = sortBy {
+            items.append(URLQueryItem(name: "sortBy", value: sortBy.rawValue))
+        }
+        
+        urlComponents.queryItems = items
         
         guard let url = urlComponents.url else {
             fatalError("URL construction failed!")
         }
         
+        print(url.absoluteString)
+        
         return url
     }
     
-    func createHeadlineURL(for category: Category?, in language: Language?, from: String?, to: String?) -> URL {
+    func createHeadlineURL(for category: Category?, in language: Language?) -> URL {
         urlComponents.path = "/v2/top-headlines"
         
         var items: [URLQueryItem] = [URLQueryItem(name: "apiKey", value: apiKey)]
@@ -42,11 +56,6 @@ class URLBuilder {
         
         if let language = language {
             items.append(URLQueryItem(name: "language", value: language.rawValue))
-        }
-        
-        if from != nil && to != nil {
-            items.append(URLQueryItem(name: "from", value: from!))
-            items.append(URLQueryItem(name: "to", value: to!))
         }
         
         urlComponents.queryItems = items

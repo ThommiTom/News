@@ -1,23 +1,16 @@
 //
-//  CriteriaSettingsView.swift
+//  SearchSetupView.swift
 //  News
 //
-//  Created by Thomas Schatton on 06.07.22.
+//  Created by Thomas Schatton on 07.07.22.
 //
 
 import SwiftUI
 
-struct SetupView: View {
+struct SearchSetupView: View {
     @Environment(\.dismiss) var dismiss
     
-    @ObservedObject var settings: UserSettings
-    
-    @State private var from: Date = .now
-    @State private var to: Date = .now
-    
-    private let languages: Array<Language> = [ .de, .en, .es, .fr, .it, .nl ]
-    private let countries: Array<Country> = [ .at, .ca, .fr, .de, .jp, .nl, .pl, .ue, .gb, .us]
-    private let categories: Array<Category> = [ .business, .entertainment, .general, .health, .science, .sports, .technology]
+    @ObservedObject var settings: SearchSettings
     
     private var lowerLimit: Date {
         // MARK: testing the API with from and to parameters shows that the api is not working correctly
@@ -33,6 +26,13 @@ struct SetupView: View {
         NavigationView {
             List {
                 Section {
+                    TextField("What are you looking for?", text: $settings.searchText)
+                } header: {
+                    Text("Currently searching for")
+                }
+
+                
+                Section {
                     Picker("Language", selection: $settings.language) {
                         ForEach(languages, id: \.self) {
                             Text($0.rawValue)
@@ -44,30 +44,8 @@ struct SetupView: View {
                 }
                 
                 Section {
-                    Toggle(settings.categoryToggleOn ? "Disable" : "Enable", isOn: $settings.categoryToggleOn.animation())
-                    if settings.categoryToggleOn {
-                        Picker("Category", selection: $settings.category) {
-                            ForEach(categories, id: \.self) {
-                                Text($0.rawValue)
-                            }
-                        }
-                        .pickerStyle(.wheel)
-                        .disabled(!settings.categoryToggleOn)
-                    }
-                } header: {
-                    Text("Category")
-                }
-                
-                Section {
                     Toggle(settings.periodToggleOn ? "Disable" : "Enable", isOn: $settings.periodToggleOn.animation())
                     if settings.periodToggleOn{
-//                        VStack {
-//                            DatePicker("From", selection: $from, in: lowerLimit...upperLimit, displayedComponents: .date)
-//                                .datePickerStyle(.compact)
-//                            DatePicker("to", selection: $to, in: from...upperLimit, displayedComponents: .date)
-//                                .datePickerStyle(.compact)
-//                        }
-                        
                         HStack {
                             Spacer()
 
@@ -75,7 +53,7 @@ struct SetupView: View {
                                 Text("From")
                                     .font(.title2)
 
-                                DatePicker("From", selection: $from, in: lowerLimit...upperLimit, displayedComponents: .date)
+                                DatePicker("From", selection: $settings.from, in: lowerLimit...upperLimit, displayedComponents: .date)
                                     .datePickerStyle(.compact)
                                     .labelsHidden()
                             }
@@ -87,7 +65,7 @@ struct SetupView: View {
                                 Text("To")
                                     .font(.title2)
 
-                                DatePicker("to", selection: $to, in: from...upperLimit, displayedComponents: .date)
+                                DatePicker("to", selection: $settings.to, in: settings.from...upperLimit, displayedComponents: .date)
                                     .datePickerStyle(.compact)
                                     .labelsHidden()
                             }
@@ -98,37 +76,40 @@ struct SetupView: View {
                 } header: {
                     Text("Period")
                 }
+                
+                Section {
+                    Picker("Sorting by", selection: $settings.sortBy) {
+                        ForEach(sortings, id:\.self) {
+                            Text($0.rawValue)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                } header: {
+                    Text("Sorting")
+                }
             }
-            .navigationTitle("Settings")
+            .navigationTitle("Search Settings")
             .listStyle(.grouped)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Reset") {
-                        from = .now
-                        to = .now
                         settings.resetSettings()
                     }
                 }
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
-                        if settings.periodToggleOn {
-                            settings.from = from
-                            settings.to = to
-                        } else {
-                            settings.from = nil
-                            settings.to = nil
-                        }
                         dismiss()
                     }
                 }
             }
         }
     }
+
 }
 
-struct CriteriaSettingsView_Previews: PreviewProvider {
+struct SearchSetupView_Previews: PreviewProvider {
     static var previews: some View {
-        SetupView(settings: UserSettings())
+        SearchSetupView(settings: SearchSettings())
     }
 }
