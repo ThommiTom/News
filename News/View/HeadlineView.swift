@@ -37,7 +37,8 @@ struct HeadlineView: View {
                 }
             }
             .sheet(isPresented: $showSettings, onDismiss: {
-                print("WIP - define on dismiss action here")
+                let testURL = URLBuilder.shared.createHeadlineURL(for: settings.category, in: settings.language, from: settings.dateFrom, to: settings.dateTo)
+                print(testURL)
             }, content: {
                 SetupView(settings: settings)
             })

@@ -54,4 +54,31 @@ class URLBuilder {
         
         return url
     }
+    
+    func createHeadlineURL(for category: Category?, in language: Language?, from: String?, to: String?) -> URL {
+        urlComponents.path = "/v2/top-headlines"
+        
+        var items: [URLQueryItem] = [URLQueryItem(name: "apiKey", value: apiKey)]
+        
+        if let category = category {
+            items.append(URLQueryItem(name: "category", value: category.rawValue))
+        }
+        
+        if let language = language {
+            items.append(URLQueryItem(name: "language", value: language.rawValue))
+        }
+        
+        if from != nil && to != nil {
+            items.append(URLQueryItem(name: "from", value: from!))
+            items.append(URLQueryItem(name: "to", value: to!))
+        }
+        
+        urlComponents.queryItems = items
+        
+        guard let url = urlComponents.url else {
+            fatalError("URL construction failed!")
+        }
+        
+        return url
+    }
 }
