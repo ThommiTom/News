@@ -15,9 +15,6 @@ struct SetupView: View {
     @State private var from: Date = .now
     @State private var to: Date = .now
     
-    @State private var categoryToggleOn = false
-    @State private var periodToggleOn = false
-    
     private let languages: Array<Language> = [ .de, .en, .es, .fr, .it, .nl ]
     private let countries: Array<Country> = [ .at, .ca, .fr, .de, .jp, .nl, .pl, .ue, .gb, .us]
     private let categories: Array<Category> = [ .business, .entertainment, .general, .health, .science, .sports, .technology]
@@ -46,8 +43,8 @@ struct SetupView: View {
                 }
                 
                 Section {
-                    Toggle(categoryToggleOn ? "Disable" : "Enable", isOn: $categoryToggleOn.animation())
-                    if categoryToggleOn {
+                    Toggle(settings.categoryToggleOn ? "Disable" : "Enable", isOn: $settings.categoryToggleOn.animation())
+                    if settings.categoryToggleOn {
                         Picker("Category", selection: $settings.category) {
                             ForEach(categories, id: \.self) {
                                 Text($0.rawValue)
@@ -61,8 +58,8 @@ struct SetupView: View {
                 }
                 
                 Section {
-                    Toggle(periodToggleOn ? "Disable" : "Enable", isOn: $periodToggleOn.animation())
-                    if periodToggleOn{
+                    Toggle(settings.periodToggleOn ? "Disable" : "Enable", isOn: $settings.periodToggleOn.animation())
+                    if settings.periodToggleOn{
                         HStack {
                             Spacer()
                             
@@ -99,8 +96,6 @@ struct SetupView: View {
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button("Reset") {
-                        categoryToggleOn = false
-                        periodToggleOn = false
                         from = .now
                         to = .now
                         settings.resetSettings()
@@ -109,7 +104,7 @@ struct SetupView: View {
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button("Done") {
-                        if periodToggleOn {
+                        if settings.periodToggleOn {
                             settings.from = from
                             settings.to = to
                         } else {

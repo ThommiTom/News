@@ -8,6 +8,9 @@
 import Foundation
 
 class UserSettings: ObservableObject {
+    @Published var categoryToggleOn = false
+    @Published var periodToggleOn = false
+    
     @Published var language: Language = .de
 //    @Published var country: Country = .de
     @Published var category: Category = .general
@@ -37,6 +40,8 @@ class UserSettings: ObservableObject {
     }
 
     func resetSettings() {
+        categoryToggleOn = false
+        periodToggleOn = false
         language = .de
 //        country = .de
         category = .general
