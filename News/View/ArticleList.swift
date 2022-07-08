@@ -16,7 +16,7 @@ struct ArticleList: View {
         List {
             ForEach($articles, id: \.self) { article in
                 NavigationLink {
-                    Text("DetailView comes here.")
+                    ArticleDetailsView(article: article)
                 } label: {
                     ArticleRowView(article: article)
                 }
