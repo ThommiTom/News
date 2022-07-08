@@ -26,6 +26,7 @@ struct SearchView: View {
                     }
                 }
                 .sheet(isPresented: $showSettings, onDismiss: {
+                    guard settings.searchText.isEmpty else { return }
                     Task {
                         await newsHandler.fetchNews(settings.searchText, in: settings.language, from: settings.dateFrom, to: settings.dateTo, sortBy: settings.sortBy)
                     }
