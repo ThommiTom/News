@@ -15,7 +15,10 @@ class NetworkManager {
     private init() {}
     
     private func networkCall(with url: URL, completion: @escaping (Result<NewsResponse, NetworkError>) -> Void) async {
-        URLSession.shared.dataTask(with: URLRequest(url: url)) { data, urlResponse, error in
+        var urlRequest = URLRequest(url: url)
+        urlRequest.addValue(apiKey, forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: urlRequest) { data, urlResponse, error in
             // handle possible error
             guard error == nil else {
                 print(NetworkError.unableToComplete.localizedDescription)

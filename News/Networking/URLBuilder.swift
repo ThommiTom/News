@@ -19,7 +19,7 @@ class URLBuilder {
     func createEverythingURL(searchFor q: String, in language: Language?, from: String?, to: String?, sortBy: SortBy?) -> URL {
         urlComponents.path = "/v2/everything"
 
-        var items: [URLQueryItem] = [ URLQueryItem(name: "apiKey", value: apiKey), URLQueryItem(name: "q", value: q) ]
+        var items: [URLQueryItem] = [ URLQueryItem(name: "q", value: q) ]
         
         if let language = language {
             items.append(URLQueryItem(name: "language", value: language.rawValue))
@@ -48,7 +48,7 @@ class URLBuilder {
     func createHeadlineURL(for category: Category?, in language: Language?) -> URL {
         urlComponents.path = "/v2/top-headlines"
         
-        var items: [URLQueryItem] = [URLQueryItem(name: "apiKey", value: apiKey)]
+        var items: [URLQueryItem] = []
         
         if let category = category {
             items.append(URLQueryItem(name: "category", value: category.rawValue))
