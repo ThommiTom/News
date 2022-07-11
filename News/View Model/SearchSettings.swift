@@ -8,7 +8,7 @@
 import Foundation
 
 class SearchSettings: ObservableObject {
-    var searchText: String = ""
+    @Published var searchText: String = ""
     @Published var periodToggleOn = false
     @Published var sortToggleOn = false
     
