@@ -10,7 +10,7 @@ import Foundation
 class NewsHandler: ObservableObject {
     @Published var articles: [Article] = []
     @Published var headlines: [Article] = []
-    @Published var favoriteArticles: [Article] = []
+    @Published var readingList: [Article] = []
     
     func fetchNews(_ q: String, in language: Language, from: String?, to: String?, sortBy: SortBy) async {
         if !q.isEmpty {
@@ -39,4 +39,9 @@ class NewsHandler: ObservableObject {
             }
         }
     }
+    
+    func addToReadingList(article: Article) {
+        readingList.append(article)
+    }
+    
 }

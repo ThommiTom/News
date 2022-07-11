@@ -27,7 +27,7 @@ struct ContentView: View {
                 }
                 .tag("headlines")
             
-            FavoriteView()
+            ReadingListView()
                 .tabItem {
                     Image(systemName: "eyeglasses")
                     Text("Reading List")
