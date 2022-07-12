@@ -11,6 +11,7 @@ struct ArticleList: View {
     @Environment(\.dismissSearch) var dismissSearch
     
     @EnvironmentObject var newsHandler: NewsHandler
+    
     @Binding var articles: Array<Article>
     
     var body: some View {
@@ -23,7 +24,7 @@ struct ArticleList: View {
                 }
                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
                     Button {
-                        newsHandler.addToReadingList(article: article.wrappedValue)
+                        //newsHandler.addToReadingList(article: article.wrappedValue)
                     } label: {
                             Label {
                                 Text("add to reading list")

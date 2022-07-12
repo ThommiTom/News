@@ -30,3 +30,9 @@ struct Source: Codable, Hashable {
     let id: String?
     let name: String?
 }
+
+
+struct CustomArticle: Codable, Hashable {
+    let article: Article
+    var inReadingList = false
+}
