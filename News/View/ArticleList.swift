@@ -24,7 +24,7 @@ struct ArticleList: View {
                 }
                 .swipeActions(edge: .leading, allowsFullSwipe: true) {
                     Button {
-                        //newsHandler.addToReadingList(article: article.wrappedValue)
+                        newsHandler.addToReadingList(article: article.wrappedValue)
                     } label: {
                             Label {
                                 Text("add to reading list")
@@ -40,6 +40,8 @@ struct ArticleList: View {
             }
         }
         .listStyle(.plain)
+        .animation(.default, value: articles)
+        
     }
 }
 

@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HeadlineView: View {
+    @Environment(\.scenePhase) var scenePhase
+    
     @EnvironmentObject var newsHandler: NewsHandler
     @StateObject var settings = HeadlineSettings()
     
@@ -24,9 +26,11 @@ struct HeadlineView: View {
                     Image(systemName: "gear")
                 }
             }
-            .onAppear {
-                Task {
-                    await newsHandler.fetchHeadlines(for: settings.category, in: settings.language)
+            .onChange(of: scenePhase) { newPhase in
+                if newPhase == .active {
+                    Task {
+                        await newsHandler.fetchHeadlines(for: settings.category, in: settings.language)
+                    }
                 }
             }
             .refreshable {
