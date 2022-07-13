@@ -8,18 +8,9 @@
 import SwiftUI
 
 struct ReadingListView: View {
-    @EnvironmentObject var newsHandler: NewsHandler
-    
     var body: some View {
         NavigationView {
-            List {
-                ForEach(newsHandler.readingList, id: \.self) {
-                    Text($0.article.title ?? "nil")
-                }
-                .onDelete(perform: newsHandler.deleteArticle)
-            }
-            .navigationTitle("Reading List")
-            .listStyle(.plain)
+            CompactArticleView()
         }
         .navigationViewStyle(.stack)
     }
