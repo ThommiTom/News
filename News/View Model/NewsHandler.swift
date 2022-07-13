@@ -10,7 +10,7 @@ import Foundation
 class NewsHandler: ObservableObject {
     @Published var articles: [Article] = []
     @Published var headlines: [Article] = []
-    @Published var readingList: [Article] = []
+    @Published var readingList: [ReadingList] = []
     
     func fetchNews(_ q: String, in language: Language, from: String?, to: String?, sortBy: SortBy) async {
         if !q.isEmpty {
@@ -54,9 +54,14 @@ class NewsHandler: ObservableObject {
         }
 
         // adding article to reading list
-        index = readingList.firstIndex(of: article)
+        let articlesFromReadingList = readingList.map { $0.article }
+        index = articlesFromReadingList.firstIndex(of: article)
         if index == nil {
-            readingList.append(article)
+            readingList.append(ReadingList(article: article))
         }
+    }
+    
+    func deleteArticle(offset: IndexSet) {
+        readingList.remove(atOffsets: offset)
     }
 }

@@ -13,9 +13,10 @@ struct ReadingListView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(newsHandler.readingList, id: \.self) { article in
-                    Text(article.title ?? "nil")
+                ForEach(newsHandler.readingList, id: \.self) {
+                    Text($0.article.title ?? "nil")
                 }
+                .onDelete(perform: newsHandler.deleteArticle)
             }
             .navigationTitle("Reading List")
             .listStyle(.plain)
