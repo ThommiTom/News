@@ -40,8 +40,7 @@ struct ArticleList: View {
             }
         }
         .listStyle(.plain)
-        .animation(.default, value: articles)
-        
+        .animation(.default, value: articles)   
     }
 }
 
