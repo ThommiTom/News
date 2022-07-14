@@ -39,6 +39,6 @@ struct ArticleHeaderView: View {
 
 struct ArticleHeaderView_Previews: PreviewProvider {
     static var previews: some View {
-        ArticleHeaderView(article: Binding<Article>.constant(Article.example), showHeadline: false)
+        ArticleHeaderView(article: Binding<Article>.constant(Article.example), showHeadline: true)
     }
 }

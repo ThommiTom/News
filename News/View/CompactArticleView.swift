@@ -12,11 +12,19 @@ struct CompactArticleView: View {
     
     var body: some View {
         List {
-            ForEach(newsHandler.readingList, id: \.self) { item in
-                Text(item.article.title ?? "")
-//                ArticleHeaderView(article: item.article, showHeadline: true)
+            ForEach($newsHandler.readingList, id: \.self) { $item in
+                NavigationLink {
+                    Text("Now we read the article \(item.article.title ?? "nil")")
+                } label: {
+                    HStack {
+                        Image(systemName: "circle.fill")
+                            .foregroundColor(.blue)
+                            .opacity(item.articleRead ? 0.0 : 0.7)
+                            .scaleEffect(0.5)
+                        ArticleHeaderView(article: $item.article, showHeadline: true)
+                    }
+                }
             }
-            .onDelete(perform: newsHandler.deleteArticle)
         }
         .navigationTitle("Reading List")
         .listStyle(.plain)

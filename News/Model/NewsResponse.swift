@@ -32,6 +32,6 @@ struct Source: Codable, Hashable {
 }
 
 struct ReadingListItem: Codable, Hashable {
-    let article: Article
+    var article: Article
     var articleRead = false
 }
