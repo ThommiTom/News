@@ -14,7 +14,7 @@ struct CompactArticleView: View {
         List {
             ForEach($newsHandler.readingList, id: \.self) { $item in
                 NavigationLink {
-                    Text("Now we read the article \(item.article.title ?? "nil")")
+                    ReadingListArticleDetailsView(item: $item)
                 } label: {
                     HStack {
                         Image(systemName: "circle.fill")
@@ -24,7 +24,34 @@ struct CompactArticleView: View {
                         ArticleHeaderView(article: $item.article, showHeadline: true)
                     }
                 }
+                .swipeActions(edge: .leading, allowsFullSwipe: true) {
+                    if item.articleRead {
+                        Button {
+                            newsHandler.toggleReadingState(item: $item)
+                        } label: {
+                            Label {
+                                Text("Mark as unread")
+                            } icon: {
+                                Image(systemName: "eyeglasses")
+                                    .foregroundColor(.blue)
+                            }
+                        }
+                        .tint(.blue.opacity(0.8))
+                    } else {
+                        Button {
+                            newsHandler.toggleReadingState(item: $item)
+                        } label: {
+                            Label {
+                                Text("Mark as read")
+                            } icon: {
+                                Image(systemName: "eyeglasses")
+                                    .foregroundColor(.gray)
+                            }
+                        }
+                    }
+                }
             }
+            .onDelete(perform: newsHandler.deleteArticle)
         }
         .navigationTitle("Reading List")
         .listStyle(.plain)

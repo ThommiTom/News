@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class NewsHandler: ObservableObject {
     @Published var articles: [Article] = []
@@ -63,5 +64,13 @@ class NewsHandler: ObservableObject {
     
     func deleteArticle(offset: IndexSet) {
         readingList.remove(atOffsets: offset)
+    }
+    
+    func setAsRead(item: Binding<ReadingListItem>) {
+        item.articleRead.wrappedValue = true
+    }
+    
+    func toggleReadingState(item: Binding<ReadingListItem>) {
+        item.articleRead.wrappedValue.toggle()
     }
 }
