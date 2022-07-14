@@ -39,8 +39,10 @@ struct HeadlineView: View {
                 }
             }
             .sheet(isPresented: $showSettings, onDismiss: {
+                newsHandler.headlines.removeAll()
                 Task {
                     await newsHandler.fetchHeadlines(for: settings.category, in: settings.language)
+                    
                 }
             }, content: {
                 HeadlineSetupView(settings: settings)

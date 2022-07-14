@@ -13,6 +13,16 @@ class NewsHandler: ObservableObject {
     @Published var headlines: [Article] = []
     @Published var readingList: [ReadingListItem] = []
     
+    var numberUnreadArticles: Int {
+        var count = 0
+        var _ = readingList.map {
+            if !$0.articleRead {
+                count += 1
+            }
+        }
+        return count
+    }
+    
     func fetchNews(_ q: String, in language: Language, from: String?, to: String?, sortBy: SortBy) async {
         if !q.isEmpty {
             await NetworkManager.shared.getNews(searchFor: q, in: language, from: from, to: to, sortBy: sortBy) { result in
@@ -68,7 +78,6 @@ class NewsHandler: ObservableObject {
     
     func deleteItem(item: ReadingListItem) {
         if let index = readingList.firstIndex(of: item) {
-            print("Article found at index: \(index)")
             readingList.remove(at: index)
         }
     }

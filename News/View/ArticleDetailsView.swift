@@ -42,6 +42,7 @@ struct ArticleDetailsView: View {
                                 .scaledToFit()
                         } placeholder: {
                             ProgressView()
+                                .padding()
                         }
                         
                         if let author = article.author {
