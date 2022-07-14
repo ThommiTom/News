@@ -50,8 +50,13 @@ struct CompactArticleView: View {
                         }
                     }
                 }
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button("Delete", role: .destructive) {
+                        newsHandler.deleteItem(item: item)
+                    }
+                }
             }
-            .onDelete(perform: newsHandler.deleteArticle)
+            //.onDelete(perform: newsHandler.deleteArticle) // if swipeActions are used swiftUI stops sythentising onDelete function
         }
         .navigationTitle("Reading List")
         .listStyle(.plain)

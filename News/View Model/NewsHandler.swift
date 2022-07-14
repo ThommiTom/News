@@ -66,6 +66,13 @@ class NewsHandler: ObservableObject {
         readingList.remove(atOffsets: offset)
     }
     
+    func deleteItem(item: ReadingListItem) {
+        if let index = readingList.firstIndex(of: item) {
+            print("Article found at index: \(index)")
+            readingList.remove(at: index)
+        }
+    }
+    
     func setAsRead(item: Binding<ReadingListItem>) {
         item.articleRead.wrappedValue = true
     }

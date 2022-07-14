@@ -32,6 +32,7 @@ struct ContentView: View {
                     Image(systemName: "eyeglasses")
                     Text("Reading List")
                 }
+                .badge(newsHandler.readingList.count)
                 .tag("readingList")
         }
         .environmentObject(newsHandler)
