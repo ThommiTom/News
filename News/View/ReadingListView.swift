@@ -41,5 +41,6 @@ struct ReadingListView: View {
 struct FavoriteView_Previews: PreviewProvider {
     static var previews: some View {
         ReadingListView()
+            .environmentObject(NewsHandler())
     }
 }
