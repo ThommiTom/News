@@ -58,13 +58,12 @@ struct CompactArticleView: View {
             }
             //.onDelete(perform: newsHandler.deleteArticle) // if swipeActions are used swiftUI stops sythentising onDelete function
         }
-        .navigationTitle("Reading List")
-        .listStyle(.plain)
     }
 }
 
 struct CompactArticleView_Previews: PreviewProvider {
     static var previews: some View {
         CompactArticleView()
+            .environmentObject(NewsHandler())
     }
 }

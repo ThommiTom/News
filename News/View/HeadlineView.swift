@@ -55,5 +55,6 @@ struct HeadlineView: View {
 struct HeadlineView_Previews: PreviewProvider {
     static var previews: some View {
         HeadlineView()
+            .environmentObject(NewsHandler())
     }
 }
