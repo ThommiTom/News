@@ -8,9 +8,31 @@
 import SwiftUI
 
 struct ReadingListView: View {
+    @State private var showingCompactView = true
+    
     var body: some View {
         NavigationView {
-            CompactArticleView()
+            Group {
+                if showingCompactView {
+                    CompactArticleView()
+                    Button {
+                        showingCompactView.toggle()
+                    } label: {
+                        Image(systemName: showingCompactView ? "list.dash" : "square.grid.2x2")
+                    }
+                } else {
+                    Text("GridView is coming here")
+                }
+            }
+            .navigationTitle("Reading List")
+            .listStyle(.plain)
+            .toolbar {
+                Button {
+                    showingCompactView.toggle()
+                } label: {
+                    Image(systemName: showingCompactView ? "list.dash" : "square.grid.2x2")
+                }
+            }
         }
         .navigationViewStyle(.stack)
     }
