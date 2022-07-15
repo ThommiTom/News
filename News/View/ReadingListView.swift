@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct ReadingListView: View {
+    @EnvironmentObject var newsHandler: NewsHandler
     @State private var showingCompactView = true
     
     var body: some View {
         NavigationView {
-            Group {
-                if showingCompactView {
+            ZStack {
+                
+                EmptyReadingListView()
+                    .opacity(newsHandler.readingList.isEmpty ? 1.0 : 0.0)
+                
+               if showingCompactView {
                     CompactArticleView()
-                    Button {
-                        showingCompactView.toggle()
-                    } label: {
-                        Image(systemName: showingCompactView ? "list.dash" : "square.grid.2x2")
-                    }
                 } else {
                     Text("GridView is coming here")
                 }
@@ -30,8 +30,9 @@ struct ReadingListView: View {
                 Button {
                     showingCompactView.toggle()
                 } label: {
-                    Image(systemName: showingCompactView ? "list.dash" : "square.grid.2x2")
+                    Image(systemName: showingCompactView ? "square.grid.2x2" : "list.dash")
                 }
+                .opacity(newsHandler.readingList.count == 0 ? 0.0 : 1.0)
             }
         }
         .navigationViewStyle(.stack)
