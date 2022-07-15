@@ -16,7 +16,11 @@ struct SearchView: View {
     
     var body: some View {
         NavigationView {
-            ArticleList(articles: $newsHandler.articles)
+            ZStack {
+                PlaceholderView(sfSymbolName: "magnifyingglass", message: "Nothing here yet.", hint: "Use the search field or the gear settings to look for something specific.")
+                    .opacity(newsHandler.articles.isEmpty ? 1.0 : 0.0)
+                ArticleList(articles: $newsHandler.articles)
+            }
                 .navigationTitle("News Search")
                 .searchable(text: $searchText, prompt: "Search the web for ...")
                 .onSubmit(of: SubmitTriggers.search) {

@@ -7,10 +7,14 @@
 
 import SwiftUI
 
-struct EmptyReadingListView: View {
+struct PlaceholderView: View {
+    var sfSymbolName: String
+    var message: String
+    var hint: String
+    
     var body: some View {
         VStack(alignment: .center) {
-            Image(systemName: "eyeglasses")
+            Image(systemName: sfSymbolName)
                 .resizable()
                 .scaledToFit()
                 .scaleEffect(0.3)
@@ -18,12 +22,12 @@ struct EmptyReadingListView: View {
                 .padding(.horizontal)
                 .opacity(0.5)
             
-            Text("Currently your reading list is empty.")
+            Text(message)
                 .font(.headline)
                 .opacity(0.7)
                 .padding()
             
-            Text("You can add articles from headline or search tab by using swipe gestures.")
+            Text(hint)
                 .font(.callout)
                 .multilineTextAlignment(.center)
                 .opacity(0.5)
@@ -34,6 +38,6 @@ struct EmptyReadingListView: View {
 
 struct EmptyReadingListView_Previews: PreviewProvider {
     static var previews: some View {
-        EmptyReadingListView()
+        PlaceholderView(sfSymbolName: "eyeglasses", message: "Currently your reading list is empty", hint: "Add articles to your reading list by using swipe gestures in the Headline or Search tab.")
     }
 }

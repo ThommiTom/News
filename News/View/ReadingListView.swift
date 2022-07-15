@@ -14,8 +14,7 @@ struct ReadingListView: View {
     var body: some View {
         NavigationView {
             ZStack {
-                
-                EmptyReadingListView()
+                PlaceholderView(sfSymbolName: "eyeglasses", message: "Currently your reading list is empty", hint: "Add articles to your reading list by using swipe gestures in the Headline or Search tab.")
                     .opacity(newsHandler.readingList.isEmpty ? 1.0 : 0.0)
                 
                if showingCompactView {
