@@ -20,7 +20,7 @@ struct ReadingListView: View {
                if showingCompactView {
                     CompactArticleView()
                 } else {
-                    Text("GridView is coming here")
+                    GridView()
                 }
             }
             .navigationTitle("Reading List")
