@@ -12,7 +12,7 @@ class SearchSettings: ObservableObject {
     @Published var periodToggleOn = false
     @Published var sortToggleOn = false
     
-    @Published var language: Language = .de
+    @Published var language: Language = .en
     @Published var sortBy: SortBy = .publishedAt
     
     // needs to be optional, due to use in network call
@@ -44,7 +44,7 @@ class SearchSettings: ObservableObject {
         sortToggleOn = false
         
         searchText = ""
-        language = .de
+        language = .en
         sortBy = .publishedAt
         from = .now
         to = .now

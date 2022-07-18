@@ -8,11 +8,11 @@
 import Foundation
 
 class HeadlineSettings: ObservableObject {
-    @Published var language: Language = .de
+    @Published var language: Language = .en
     @Published var category: Category = .general
 
     func resetSettings() {
-        language = .de
+        language = .en
         category = .general
     }
 }
