@@ -57,6 +57,7 @@ struct GridViewItem: View {
         .frame(width: 160)
         .background(.ultraThinMaterial)
         .clipShape(RoundedRectangle(cornerRadius: 10))
+        .contentShape(RoundedRectangle(cornerRadius: 10))
     }
 }
 

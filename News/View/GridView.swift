@@ -21,6 +21,14 @@ struct GridView: View {
                     } label: {
                         GridViewItem(readingListItem: $item)
                     }
+                    .contextMenu {
+                        Button(item.articleRead ? "Mark as unread" : "Mark as read") {
+                            item.articleRead.toggle()
+                        }
+                        Button("Delete", role: .destructive) {
+                            newsHandler.deleteItem(item: item)
+                        }
+                    }
                 }
             }
         }
