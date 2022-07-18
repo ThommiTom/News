@@ -17,7 +17,7 @@ struct ReadingListView: View {
                 PlaceholderView(sfSymbolName: "eyeglasses", message: "Currently your reading list is empty", hint: "Add articles to your reading list by using swipe gestures in the Headline or Search tab.")
                     .opacity(newsHandler.readingList.isEmpty ? 1.0 : 0.0)
                 
-               if showingCompactView {
+                if showingCompactView {
                     CompactArticleView()
                 } else {
                     GridView()
@@ -27,9 +27,11 @@ struct ReadingListView: View {
             .listStyle(.plain)
             .toolbar {
                 Button {
-                    showingCompactView.toggle()
+                    withAnimation(.easeInOut(duration: 0.5)) {
+                        showingCompactView.toggle()
+                    }
                 } label: {
-                    Image(systemName: showingCompactView ? "square.grid.2x2" : "list.dash")
+                    Image(systemName: showingCompactView ? "square.grid.2x2" : "list.bullet")
                 }
                 .opacity(newsHandler.readingList.count == 0 ? 0.0 : 1.0)
             }
