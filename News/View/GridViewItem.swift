@@ -15,6 +15,7 @@ struct GridViewItem: View {
             ZStack {
                 Text(readingListItem.article.source?.name ?? "")
                     .font(.caption)
+                    .opacity(0.7)
                     .foregroundColor(.black)
                 
                 HStack {
@@ -37,12 +38,21 @@ struct GridViewItem: View {
                     .padding()
             }
             
+            if let publishedAt = readingListItem.article.publishedAt {
+                Text(publishedAt.formatted(date: .abbreviated, time: .omitted))
+                    .opacity(0.7)
+                    .foregroundColor(.black)
+                    .font(.caption2)
+            }
+            
             Text(readingListItem.article.title ?? "")
                 .multilineTextAlignment(.leading)
                 .font(.caption2)
                 .foregroundColor(.black)
                 .opacity(0.7)
-                .padding()
+                .padding(.horizontal)
+                .padding(.top, 1)
+                .padding(.bottom, 5)
         }
         .frame(width: 160)
         .background(.ultraThinMaterial)
