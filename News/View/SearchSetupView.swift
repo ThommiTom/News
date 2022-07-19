@@ -46,31 +46,13 @@ struct SearchSetupView: View {
                 Section {
                     Toggle(settings.periodToggleOn ? "Disable" : "Enable", isOn: $settings.periodToggleOn.animation())
                     if settings.periodToggleOn{
-                        HStack {
-                            Spacer()
-
-                            VStack(alignment: .leading) {
-                                Text("From")
-                                    .font(.title2)
-
-                                DatePicker("From", selection: $settings.from, in: lowerLimit...upperLimit, displayedComponents: .date)
-                                    .datePickerStyle(.compact)
-                                    .labelsHidden()
-                            }
-
-
-                            Spacer()
-
-                            VStack(alignment: .leading) {
-                                Text("To")
-                                    .font(.title2)
-
-                                DatePicker("to", selection: $settings.to, in: settings.from...upperLimit, displayedComponents: .date)
-                                    .datePickerStyle(.compact)
-                                    .labelsHidden()
-                            }
-
-                            Spacer()
+                        
+                        VStack(alignment: .leading) {
+                            DatePicker("From", selection: $settings.from, in: lowerLimit...upperLimit, displayedComponents: .date)
+                                .datePickerStyle(.compact)
+                            
+                            DatePicker("to", selection: $settings.to, in: settings.from...upperLimit, displayedComponents: .date)
+                                .datePickerStyle(.compact)
                         }
                     }
                 } header: {
