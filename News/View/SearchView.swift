@@ -21,35 +21,35 @@ struct SearchView: View {
                     .opacity(newsHandler.articles.isEmpty ? 1.0 : 0.0)
                 ArticleList(articles: $newsHandler.articles)
             }
-                .navigationTitle("News Search")
-                .searchable(text: $searchText, prompt: "Search the web for ...")
-                .onSubmit(of: SubmitTriggers.search) {
-                    settings.searchText = searchText
-                    Task {
-                        await newsHandler.fetchNews(settings.searchText, in: settings.language, from: settings.dateFrom, to: settings.dateTo, sortBy: settings.sortBy)
-                    }
+            .navigationTitle("News Search")
+            .searchable(text: $searchText, prompt: "Search the web for ...")
+            .refreshable {
+                Task {
+                    await newsHandler.fetchNews(settings.searchText, in: settings.language, from: settings.dateFrom, to: settings.dateTo, sortBy: settings.sortBy)
                 }
-                .sheet(isPresented: $showSettings, onDismiss: {
-                    guard !settings.searchText.isEmpty else { return }
-                    newsHandler.articles.removeAll()
-                    Task {
-                        await newsHandler.fetchNews(settings.searchText, in: settings.language, from: settings.dateFrom, to: settings.dateTo, sortBy: settings.sortBy)
-                    }
-                }, content: {
-                    SearchSetupView(settings: settings)
-                })
-                .refreshable {
-                    Task {
-                        await newsHandler.fetchNews(settings.searchText, in: settings.language, from: settings.dateFrom, to: settings.dateTo, sortBy: settings.sortBy)
-                    }
+            }
+            .onSubmit(of: SubmitTriggers.search) {
+                settings.searchText = searchText
+                Task {
+                    await newsHandler.fetchNews(settings.searchText, in: settings.language, from: settings.dateFrom, to: settings.dateTo, sortBy: settings.sortBy)
                 }
-                .toolbar {
-                    Button {
-                        showSettings = true
-                    } label: {
-                        Image(systemName: "gear")
-                    }
+            }
+            .sheet(isPresented: $showSettings, onDismiss: {
+                guard !settings.searchText.isEmpty else { return }
+                newsHandler.articles.removeAll()
+                Task {
+                    await newsHandler.fetchNews(settings.searchText, in: settings.language, from: settings.dateFrom, to: settings.dateTo, sortBy: settings.sortBy)
                 }
+            }, content: {
+                SearchSetupView(settings: settings)
+            })
+            .toolbar {
+                Button {
+                    showSettings = true
+                } label: {
+                    Image(systemName: "gear")
+                }
+            }
         }
         .navigationViewStyle(.stack)
     }
