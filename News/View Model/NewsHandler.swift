@@ -13,6 +13,14 @@ class NewsHandler: ObservableObject {
     @Published var headlines: [Article] = []
     @Published var readingList: [ReadingListItem] = []
     
+    fileprivate let storage = FileManager.DocumentDirectory.appendingPathComponent("readingListStorage")
+    
+    init() {
+        if let storedData: [ReadingListItem] = FileManager().load(location: storage) {
+            self.readingList = storedData
+        }
+    }
+    
     var numberUnreadArticles: Int {
         var count = 0
         var _ = readingList.map {
@@ -69,24 +77,29 @@ class NewsHandler: ObservableObject {
         index = articlesFromReadingList.firstIndex(of: article)
         if index == nil {
             readingList.append(ReadingListItem(article: article))
+            FileManager().save(item: readingList, location: storage)
         }
     }
     
     func deleteArticle(offset: IndexSet) {
         readingList.remove(atOffsets: offset)
+        FileManager().save(item: readingList, location: storage)
     }
     
     func deleteItem(item: ReadingListItem) {
         if let index = readingList.firstIndex(of: item) {
             readingList.remove(at: index)
+            FileManager().save(item: readingList, location: storage)
         }
     }
     
     func setAsRead(item: Binding<ReadingListItem>) {
         item.articleRead.wrappedValue = true
+        FileManager().save(item: readingList, location: storage)
     }
     
     func toggleReadingState(item: Binding<ReadingListItem>) {
         item.articleRead.wrappedValue.toggle()
+        FileManager().save(item: readingList, location: storage)
     }
 }
