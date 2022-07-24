@@ -30,6 +30,7 @@ struct SearchView: View {
             }
             .onSubmit(of: SubmitTriggers.search) {
                 settings.searchText = searchText
+                newsHandler.articles.removeAll()
                 Task {
                     await newsHandler.fetchNews(settings.searchText, in: settings.language, from: settings.dateFrom, to: settings.dateTo, sortBy: settings.sortBy)
                 }

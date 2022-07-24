@@ -57,18 +57,26 @@ struct ArticleDetailsView: View {
             }
             
             if let description = article.description {
-                Text(description)
-                    .opacity(0.9)
-                    .multilineTextAlignment(.leading)
+                if description.isValidHTML() {
+                    HTMLView(HTMLstring: description)
+                } else {
+                    Text(description)
+                        .opacity(0.9)
+                        .multilineTextAlignment(.leading)
+                }
             }
             
             Spacer()
                 .frame(maxWidth : .infinity, maxHeight: 5)
             
             if let articleBody = article.content {
-                Text(articleBody)
-                    .opacity(0.9)
-                    .multilineTextAlignment(.leading)
+                if articleBody.isValidHTML() {
+                    HTMLView(HTMLstring: articleBody)
+                } else {
+                    Text(articleBody)
+                        .opacity(0.9)
+                        .multilineTextAlignment(.leading)
+                }
             }
             
             Spacer()
@@ -101,6 +109,6 @@ struct ArticleDetailsView: View {
 
 struct ArticleDetailsView_Previews: PreviewProvider {
     static var previews: some View {
-        ArticleDetailsView(article: Binding<Article>.constant(Article.example))
+        ArticleDetailsView(article: Binding<Article>.constant(Article.htmlExample))
     }
 }

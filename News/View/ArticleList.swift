@@ -46,6 +46,6 @@ struct ArticleList: View {
 
 struct ArticleList_Previews: PreviewProvider {
     static var previews: some View {
-        ArticleList(articles: Binding<[Article]>.constant([Article.example, Article.example, Article.example]))
+        ArticleList(articles: Binding<[Article]>.constant([Article.example, Article.htmlExample, Article.example]))
     }
 }
