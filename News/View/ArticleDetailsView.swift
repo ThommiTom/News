@@ -16,19 +16,6 @@ struct ArticleDetailsView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 5) {
-            
-            Button {
-                dismiss()
-            } label: {
-                Label {
-                    Text("Headlines")
-                } icon: {
-                    Image(systemName: "chevron.left")
-                }
-
-            }
-            .padding(.bottom, 10)
-            
             ArticleHeaderView(article: $article, showHeadline: true)
             
             if let urlToImage = article.urlToImage {
@@ -97,7 +84,8 @@ struct ArticleDetailsView: View {
             }
             
         }
-        .navigationBarHidden(true)
+        .navigationTitle("")
+        .navigationBarTitleDisplayMode(.inline)
         .fullScreenCover(isPresented: $showInSafari) {
             if let stringURL = article.url {
                 SafariView(url: URL(string: stringURL)!)
