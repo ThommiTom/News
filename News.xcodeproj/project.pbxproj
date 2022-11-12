@@ -143,6 +143,7 @@
 				45C412CF2872EB6C00353538 /* HeadlineView.swift */,
 				45EB0F8A2875769E00E411F7 /* HeadlineSetupView.swift */,
 				45C412D12872EB7E00353538 /* ReadingListView.swift */,
+				45837A202880447B00FB0D9B /* ReadingListArticleDetailsView.swift */,
 				4543D618287F0AFD00F55B97 /* CompactArticleView.swift */,
 				45E3587C2884A5D80025FE2A /* GridView.swift */,
 				45E3587E2884A6FE0025FE2A /* GridViewItem.swift */,
@@ -150,7 +151,6 @@
 				45E86A16287817CC0030FC6F /* ArticleRowView.swift */,
 				45E86A1A287822E80030FC6F /* ArticleHeaderView.swift */,
 				45E86A1828781D660030FC6F /* ArticleDetailsView.swift */,
-				45837A202880447B00FB0D9B /* ReadingListArticleDetailsView.swift */,
 				452911B228818ED7002DC5F4 /* PlaceholderView.swift */,
 			);
 			path = View;
@@ -351,7 +351,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -405,7 +405,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -426,6 +426,8 @@
 				DEVELOPMENT_TEAM = 928Q5FMY5V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Informer;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -455,6 +457,8 @@
 				DEVELOPMENT_TEAM = 928Q5FMY5V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Informer;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
